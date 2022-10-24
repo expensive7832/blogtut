@@ -1,0 +1,28 @@
+.spinner{
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+.header .search{
+    border: none;
+    outline: none!important;
+    background-color: transparent;
+}
+
+
+.header .search::placeholder{
+    color: black;
+}
+
+.header .searchbox{
+    background-color: #cecece;
+    border-radius: 1rem;
+}
+
+
+
+.header .videoIcon{
+    border-radius: .5rem;
+}
