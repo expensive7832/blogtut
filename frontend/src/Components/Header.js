@@ -3,7 +3,7 @@ import logo from "./../assets/punch.png"
 import {HiSearchCircle} from "react-icons/hi"
 import {BsFillCollectionPlayFill} from "react-icons/bs"
 import {Container, Row, Col} from "reactstrap"
-import {Link} from "react-router-dom"
+import {NavLink} from "reactstrap"
 
 function Header() {
   return (
@@ -30,8 +30,12 @@ function Header() {
         </Row>
        </Container>
 
-       <div className="bg-danger text-white">
-          <Link></Link>
+       <div className="bg-dark text-white d-flex justify-content-between p-2 mt-4 mb-2">
+          <NavLink className='fw-bold' to={"/home"}>Home</NavLink>
+          <NavLink  className='fw-bold' to={"/about"}>About</NavLink>
+          <NavLink className='fw-bold' to={"/contact"}>Contact</NavLink>
+          <NavLink className='fw-bold' to={"/contact"}>Football</NavLink>
+          <NavLink className='fw-bold' to={"/contact"}>Relationship</NavLink>
        </div>
     </div>
   )

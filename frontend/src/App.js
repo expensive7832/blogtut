@@ -1,5 +1,6 @@
 import React from "react"
 import { BrowserRouter, Routes,Route } from "react-router-dom";
+import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 
 const Home = React.lazy(() => import("./Pages/Home"))
@@ -15,6 +16,8 @@ function App() {
       <Route path="/details" element={<Details/>}/>
     </Routes>
   </BrowserRouter>
+
+  <Footer/>
    </>
   );
 }

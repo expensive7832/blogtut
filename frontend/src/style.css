@@ -26,3 +26,57 @@
 .header .videoIcon{
     border-radius: .5rem;
 }
+
+/* start of home styling */
+.home .headline{
+    padding: 1rem 2rem;
+    border-left: 1px solid #999;
+    margin: 1rem 0;
+}
+.home .headline::after{
+    width: 80%;
+    height: 2rem;
+    border-bottom: 2px solid #ff0000;
+    content:"______________________";
+    text-align: center;
+}
+
+.home .headline i{
+    color: #ff0000
+}
+.home .headline p{
+    font-size: 1rem;
+}
+.home .banner{
+    padding-bottom: 3rem;
+    background-color: #f0f0f0;
+}
+
+.home .banner img{
+    width: 100%;
+    height: fit-content;
+    object-fit: cover;
+}
+
+.home .banner h4{
+    margin: 1rem;
+}
+
+.home .secondsection{
+    background-color: #f0f0f0;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.secondsection .head::after{
+    color: blue;
+    display: inline;
+    content: "______________________________";
+    width: 100%;
+}
+
+.latest .my-2::after{
+    color: #ff0000;
+    display: block;
+   content:"___"
+}
