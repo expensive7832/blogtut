@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Card, CardImg, CardBody } from "reactstrap"
+import { Container, Row, Col, Card, CardImg, CardBody, NavLink } from "reactstrap"
 import Img from "./../assets/display.jpeg"
 
 function Home() {
@@ -11,15 +11,19 @@ function Home() {
         <Row>
           <Col xs={12} md={4}>
 
-            <div className='headline'>
+          <NavLink href='/details'>
+          <div className='headline'>
               <i className="time">17min ago</i>
               <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
             </div>
+          </NavLink>
 
-            <div className='headline'>
+          <NavLink href="/details">
+          <div className='headline'>
               <i className="time">17min ago</i>
               <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
             </div>
+          </NavLink>
             
             <div className='headline'>
               <i className="time">17min ago</i>

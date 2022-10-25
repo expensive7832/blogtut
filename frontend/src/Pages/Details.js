@@ -11,12 +11,12 @@ function Details() {
   return (
     <div className="details">
       <Container>
-        <Row className='justify-content-between'>
+        <Row className='justify-content-between align-items-center'>
           <Col xs={12} md={8} className="">
             <h2>Obi Supprter Cause violence over comment</h2>
             <p className='lead'>25th october, 20222</p>
 
-            <img className='img-fluid' src={img} alt="" />
+            <img className='w-100' src={img} alt="" />
 
             <div>
               <p>By Angency Report</p>
