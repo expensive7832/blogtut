@@ -1,11 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import logo from "./../assets/punch.png"
 import {HiSearchCircle} from "react-icons/hi"
 import {BsFillCollectionPlayFill} from "react-icons/bs"
-import {Container, Row, Col} from "reactstrap"
+import {Container, Row, Col, Dropdown,DropdownToggle, DropdownMenu, DropdownItem} from "reactstrap"
 import {NavLink} from "reactstrap"
+import {IoMdContact} from "react-icons/io"
 
 function Header() {
+
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
   return (
     <div className="header">
        <Container fluid>
@@ -36,6 +42,15 @@ function Header() {
           <NavLink className='fw-bold' to={"/contact"}>Contact</NavLink>
           <NavLink className='fw-bold' to={"/contact"}>Football</NavLink>
           <NavLink className='fw-bold' to={"/contact"}>Relationship</NavLink>
+          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+          <DropdownToggle caret size="sm">
+            <IoMdContact/>
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem header>Header</DropdownItem>
+            <DropdownItem>Action</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
        </div>
     </div>
   )
