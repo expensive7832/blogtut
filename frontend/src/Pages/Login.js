@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Container, Row } from 'reactstrap'
+import { Col, Container, NavLink, Row } from 'reactstrap'
 
 
 function Login() {
@@ -18,6 +18,11 @@ function Login() {
 
                 <button className='btn btn-lg btn-info w-100 my-3' type="button">Login</button>
             </form>
+
+           <span className='text-white fw-bold'>
+           <small className=''>New user?</small>
+            <NavLink href="/signup">Register</NavLink>
+           </span>
         </div>
     )
 }

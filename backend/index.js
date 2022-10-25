@@ -18,8 +18,8 @@ app.use(cors())
 
 app.use(express.urlencoded({extended: true}))
 
-app.get("/getdata", (req, res) =>{
-    
+app.post("/signup", (req, res) =>{
+  console.log(req.body)    
 } )
 
 
