@@ -12,7 +12,7 @@ const handleSubmit = async(e) =>{
     const form = new FormData(e.currentTarget)
 
     await axios.post("http://localhost:5000/signup", form)
-    .then((res) => console.log(res))
+    .then((res) => alert(res?.data?.message))
     .catch((err) => console.log(err))
 }
 
@@ -20,7 +20,7 @@ const handleSubmit = async(e) =>{
         <div className="signup">
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <lable className="form-label">Name</lable>
+                    <label className="form-label">Name</label>
                     <input type="text" name="myname" className="form-control" />
                 </div>
 
