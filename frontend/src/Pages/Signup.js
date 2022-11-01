@@ -4,12 +4,16 @@ import axios from "axios"
 
 function Signup() {
 
+
+    
 const handleSubmit = async(e) =>{
     e.preventDefault()
 
     const form = new FormData(e.currentTarget)
 
     await axios.post("http://localhost:5000/signup", form)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
 }
 
     return (

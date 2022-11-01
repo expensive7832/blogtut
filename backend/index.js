@@ -1,26 +1,21 @@
-import os from "os"
-import path from "path"
-import fs from "fs"
-import events from "events"
-import http from "http"
 import dotenv from "dotenv"
 import express from "express"
 import cors from "cors"
+import User from "./Routes/User.js"
 
 dotenv.config()
 
 
 const app = express()
 
-app.use(express.json())
-
 app.use(cors())
+
+app.use(express.json())
 
 app.use(express.urlencoded({extended: true}))
 
-app.post("/signup", (req, res) =>{
-  console.log(req.body)    
-} )
+app.use(User)
+
 
 
 app.listen(process.env.PORT || 8000, () =>{
