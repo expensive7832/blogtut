@@ -1,18 +1,31 @@
 import React from 'react'
 import { Col, Container, Row } from 'reactstrap'
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 function Signup() {
 
-
+    const navigate = useNavigate()
     
 const handleSubmit = async(e) =>{
+    
     e.preventDefault()
 
     const form = new FormData(e.currentTarget)
 
     await axios.post("http://localhost:5000/signup", form)
-    .then((res) => alert(res?.data?.message))
+    .then((res) => {
+      if(res?.data?.message == "input field cannot be empty"){
+        alert(res?.data?.message);
+
+      }else if(res?.data?.message === "photo is required"){
+        alert(res?.data?.message);
+
+      }else if(res?.data?.message === "Account Successfully Created"){
+        alert(res?.data?.message);
+        navigate("/login")
+      }
+    })
     .catch((err) => console.log(err))
 }
 

@@ -71,5 +71,49 @@ app.post("/signup", async(req, res) =>{
        
   } )
 
+app.post("/login", (req, res) =>{
+  const form = new formidable.IncomingForm()
+  form.parse(req, (err, fields, files) =>{
+    const {pwd, email} = fields
+    if(pwd === "" || email === ""){
+      res.status(203).json({message: "input field cannot be empty"});
+
+    }else{
+      
+      const sql = "SELECT * FROM users WHERE email = ?"
+      Db.query(sql, [email], async(err, result) =>{
+        if(err){
+          console.log(err)
+        }else{
+          if(result[0] === undefined){
+            res.status(203).json({message: "email not found"})
+          }else{
+           
+           bcrypt.compare(pwd, result[0]?.pwd ,(err, rp) =>{
+            if(err){
+              console.log(err)
+            }else{
+             if(rp === true){
+              const newToken = jwt.sign({signature: result[0]?.name }, process.env.TOKEN, {expiresIn: 60 * 60})
+              const sql = "UPDATE users SET token = ? WHERE id = ?"
+              Db.query(sql, [newToken, result[0]?.id], (err) =>{
+                if(err){
+                  console.log(err)
+                }
+              })
+              
+             res.status(200).json({message: "login successful", userInfo: {...result[0], token: newToken}})
+             }else{
+              res.status(203).json({message: "Invalid Credentials"})
+             }
+            }
+           }  )
+          }
+        }
+      })
+    }
+  })
+})
+
 
 export default app
