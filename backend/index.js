@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 import express from "express"
 import cors from "cors"
 import User from "./Routes/User.js"
+import Article from "./Routes/Articles.js"
 
 dotenv.config()
 
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use(User)
+app.use(Article)
 
 
 

@@ -106,3 +106,29 @@
     background-size: cover;
     background-position: center;
 }
+
+.create{
+    margin-top: -.5rem;
+    background: linear-gradient(45deg, #d3ae00, #00f1), url(./assets/login.jpg);
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.article{
+    margin-top: -.5rem;
+    background: linear-gradient(45deg, #d3ae00, #00f1), url(./assets/login.jpg);
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

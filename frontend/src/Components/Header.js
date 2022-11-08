@@ -5,12 +5,14 @@ import { BsFillCollectionPlayFill } from "react-icons/bs"
 import { Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap"
 import { NavLink } from "reactstrap"
 import { IoMdContact } from "react-icons/io"
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { logout } from '../Redux/Slices/UserSlices'
+import { Link } from 'react-router-dom'
 
 function Header() {
 
   const login = useSelector((state) => (state?.user?.login))
+  const admin = useSelector((state) => (state?.user?.userData?.admin))
   const dispatch = useDispatch()
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -54,16 +56,19 @@ function Header() {
                   <IoMdContact />
                 </DropdownToggle>
                 <DropdownMenu>
+                  {admin === "true" && <DropdownItem> <NavLink className='fw-bold bg-muted my-2' href="/cat">CreateCategory</NavLink> </DropdownItem>}
+                  <DropdownItem> <NavLink className='fw-bold bg-muted my-2' href="/create-article">Create Article</NavLink> </DropdownItem>
+
                   <DropdownItem> <button onClick={() => dispatch(logout())} className='w-75 m-auto btn btn-md btn-danger'>Logout</button> </DropdownItem>
-                  
+
                 </DropdownMenu>
               </Dropdown>
             </>
             :
 
-           <NavLink href="/login">
-            Login
-           </NavLink>
+            <NavLink href="/login">
+              Login
+            </NavLink>
         }
       </div>
     </div>

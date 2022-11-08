@@ -8,6 +8,8 @@ const Details = React.lazy(() => import("./Pages/Details"))
 const Signup = React.lazy(() => import("./Pages/Signup"))
 const Login = React.lazy(() => import("./Pages/Login"))
 const Post = React.lazy(() => import("./Pages/Post"))
+const Createcat = React.lazy(() => import("./Pages/Createcat"))
+const CreateArticle = React.lazy(() => import("./Pages/CreateArticle"))
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/post" element={<Post/>}/>
+      <Route path="/cat" element={<Createcat/>}/>
+      <Route path="/create-article" element={<CreateArticle/>}/>
     </Routes>
   </BrowserRouter>
 

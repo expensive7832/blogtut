@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux';
 import store from './Redux/Store';
 import { persistor } from "./Redux/Store"
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
