@@ -25,4 +25,15 @@ app.post("/category", (req, res) =>{
     })
 })
 
+
+app.get("/category", (req, res) =>{
+    const sql = "SELECT * FROM category"
+    Db.query(sql, (err, result) =>{
+        if(err){
+            console.log(err)
+        }else{
+            res.json({cat:result})
+        }
+    })
+})
 export default app

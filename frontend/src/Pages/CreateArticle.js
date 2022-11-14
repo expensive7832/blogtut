@@ -1,50 +1,59 @@
-import React, { Component } from 'react'
-import { EditorState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
+import React, { Component, useState } from 'react'
+import { useQuill } from 'react-quilljs';
+import 'quill/dist/quill.snow.css'; 
+import axios from "axios"
+import { useEffect } from 'react';
 
-export class CreateArticle extends Component {
+function CreateArticle(){
+  const { quill, quillRef } = useQuill();
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          editorState: EditorState.createEmpty(),
-        };
-      }
-
-      handleStateChange = (editorState) => {
-        this.setState({
-            editorState,
-          });
-      };
+   const [desc, setDesc] = useState("")
+   const [cat, setCat] = useState()
 
 
-  render() {
+   if (quill) {
+    quill.on('text-change', (delta, oldDelta, source) => {
+   
+      
+   
+      console.log(quill.root.innerHTML); // Get innerHTML using quill
+     
+    });
+  }
+  
+      useEffect(() =>{
+        axios.get("http://localhost:5000/category")
+        .then((res) => setCat(res?.data?.cat))
+        .catch((e) => console.log(e)) 
+      }, [])
+    
     return (
-        <div className="article">
-        <div>
-            <label htmlFor="" className="form-label">Title</label>
+      <>
+       <div className="article">
+        <div className='w-25'>
+            <label htmlFor="" className="form-label text-white fw-bold">Title</label>
             <input type="text" className="form-control" name='title' />
         </div>
     
-        <div>
-            <label htmlFor="" className="form-label d-block">Category</label>
+        <div className='my-3 w-25'>
+            <label htmlFor="" className="form-label d-block text-white fw-bold">Category</label>
             <select name="cat" className='form-control'>
-                <option className='form-control' value="">testing 1</option>
-                <option className='form-control' value="">testing 2</option>
+                {cat?.map((c) =>(
+                  <option key={c?.id} className='form-control' value={c?.name}>{c?.name}</option>
+                ))}
+                
             </select>
         </div>
     
-        <div>
-        <Editor
-        editorState={this.state.editorState}
-            wrapperClassName="border-bottom border-start border-end border-white border-2"
-            editorClassName=""
-           onEditorStateChange={this.handleStateChange}
-          />
+        <div >
+          <div ref={quillRef} />
         </div>
+
+      <h1>{desc}</h1>
        </div>
+      </>
     )
   }
-}
+
 
 export default CreateArticle
