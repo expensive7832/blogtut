@@ -11,15 +11,15 @@ function CreateArticle(){
    const [cat, setCat] = useState()
 
 
-   if (quill) {
-    quill.on('text-change', (delta, oldDelta, source) => {
-   
-      
-   
-      console.log(quill.root.innerHTML); // Get innerHTML using quill
-     
-    });
-  }
+  useEffect(() =>{
+    if (quill) {
+      quill.on('text-change', (delta, oldDelta, source) => {
+       setDesc(quill.root.innerHTML); // Get innerHTML using quill
+       
+      }) 
+    } 
+  }, [quill])
+  
   
       useEffect(() =>{
         axios.get("http://localhost:5000/category")
