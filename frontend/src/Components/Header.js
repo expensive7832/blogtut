@@ -6,7 +6,7 @@ import { Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownIt
 import { NavLink } from "reactstrap"
 import { IoMdContact } from "react-icons/io"
 import { useDispatch, useSelector } from "react-redux"
-import { logout } from '../Redux/Slices/UserSlices'
+import { logout, userInfo } from '../Redux/Slices/UserSlices'
 import { Link } from 'react-router-dom'
 
 function Header() {
@@ -16,6 +16,11 @@ function Header() {
   const dispatch = useDispatch()
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  const handleLogout = () =>{
+    dispatch(logout())
+    dispatch(userInfo({}))
+  }
 
   return (
     <div className="header">
@@ -42,11 +47,9 @@ function Header() {
       </Container>
 
       <div className="bg-dark text-white d-flex justify-content-between p-2 mt-4 mb-2">
-        <NavLink className='fw-bold' to={"/home"}>Home</NavLink>
+        <NavLink className='fw-bold' href={"/"}>Home</NavLink>
         <NavLink className='fw-bold' to={"/about"}>About</NavLink>
-        <NavLink className='fw-bold' to={"/contact"}>Contact</NavLink>
-        <NavLink className='fw-bold' to={"/contact"}>Football</NavLink>
-        <NavLink className='fw-bold' to={"/contact"}>Relationship</NavLink>
+        <NavLink className='fw-bold' href={"/contact"}>Contact</NavLink>
         {
           login === true ?
             <>
@@ -59,7 +62,7 @@ function Header() {
                   {admin === "true" && <DropdownItem> <NavLink className='fw-bold bg-muted my-2' href="/cat">CreateCategory</NavLink> </DropdownItem>}
                   <DropdownItem> <NavLink className='fw-bold bg-muted my-2' href="/create-article">Create Article</NavLink> </DropdownItem>
 
-                  <DropdownItem> <button onClick={() => dispatch(logout())} className='w-75 m-auto btn btn-md btn-danger'>Logout</button> </DropdownItem>
+                  <DropdownItem> <button onClick={handleLogout} className='w-75 m-auto btn btn-md btn-danger'>Logout</button> </DropdownItem>
 
                 </DropdownMenu>
               </Dropdown>

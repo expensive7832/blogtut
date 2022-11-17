@@ -1,8 +1,31 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { Container, Row, Col, Card, CardImg, CardBody, NavLink } from "reactstrap"
 import Img from "./../assets/display.jpeg"
-
+import Moment from 'react-moment';
 function Home() {
+
+  const [article, setArticle] = useState([])
+  const [football, setFootball] = useState([])
+  const [centerImg, setCenterImg] = useState("")
+
+  useEffect(() =>{
+    axios.get("http://localhost:5000/centerArticle")
+    .then((res) => setCenterImg(res?.data?.article))
+  },[])
+  
+
+
+  useEffect(() =>{
+    axios.get("http://localhost:5000/getArticle")
+    .then((res) => setArticle(res?.data?.article))
+  }, [])
+
+  useEffect(() =>{
+    axios.get("http://localhost:5000/getArticleFootball")
+    .then((res) => setFootball(res?.data?.article))
+  }, [])
 
 
   return (
@@ -11,49 +34,41 @@ function Home() {
         <Row>
           <Col xs={12} md={4}>
 
-          <NavLink href='/details'>
-          <div className='headline'>
-              <i className="time">17min ago</i>
-              <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
-            </div>
-          </NavLink>
+          {article?.map((art) =>(
+             <NavLink key={art?.id} href={`/details/${art?.id}`}>
+             <div className='headline'>
+                 <i className="time"><Moment fromNow ago>{art?.dateCreated}</Moment></i>
+                 <p className='title'>{art?.title}</p>
+               </div>
+             </NavLink>
+          ))}
 
-          <NavLink href="/details">
-          <div className='headline'>
-              <i className="time">17min ago</i>
-              <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
-            </div>
-          </NavLink>
+        
             
-            <div className='headline'>
-              <i className="time">17min ago</i>
-              <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
-            </div>
+            
           </Col>
 
           <Col xs={12} md={4}>
            <div className='banner'>
-           <img src={Img} className="" alt="banner " />
-           <h4>Attack: I didnt choose policemen family away</h4>
+           <img src={centerImg?.img} className="" alt="banner " />
+           <h4>{centerImg?.title}</h4>
            </div>
           </Col>
 
           <Col xs={12} md={4}>
-            <p className="bg-warning w-25 p-1">Top News</p>
-            <div className='headline'>
-              <i className="time">17min ago</i>
-              <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
-            </div>
-
-            <div className='headline'>
-              <i className="time">17min ago</i>
-              <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
-            </div>
+            <p className="bg-warning w-25 p-1">Football News</p>
             
-            <div className='headline'>
-              <i className="time">17min ago</i>
-              <p className='title'>Fulani herdsmen were roaming around with dangerous weapon</p>
-            </div>
+
+            {football?.map((fb) =>(
+              <NavLink key={fb?.id} href={`/details/${fb?.id}`}>
+              <div className='headline'>
+                  <i className="time"><Moment fromNow ago>{fb?.dateCreated}</Moment></i>
+                  <p className='title'>{fb?.title}</p>
+                </div>
+              </NavLink>
+            ))}
+            
+            
           </Col>
         </Row>
         </Container> 

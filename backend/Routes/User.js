@@ -5,9 +5,19 @@ import dotenv from "dotenv"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import Db from "./../Db.js"
+import mailer from "nodemailer"
+
 dotenv.config()
 
 const app = express.Router()
+
+const transporter = mailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "expensive7832@gmail.com", // generated ethereal user
+    pass: "avusqativbccbkmm", // generated ethereal password
+  },
+})
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -109,6 +119,36 @@ app.post("/login", (req, res) =>{
             }
            }  )
           }
+        }
+      })
+    }
+  })
+})
+
+
+app.post("/contact", (req, res) =>{
+  const form = new formidable.IncomingForm()
+
+  form.parse(req, async(err, fields, files) =>{
+    const { name, email, subject, message } = fields
+    if(name === "" || email === "" || subject === "" || message === ""){
+     res.status(203).json({message: "enter your information"})
+
+    }else{
+
+     
+
+      transporter.sendMail({
+        from: `${name} <${email}>`,
+        sender: email,
+        to: "expensive7832@gmail.com",
+        subject: subject, // Subject line
+        text: message
+      }, (err) =>{
+        if(err){
+          console.log(err)
+        }else{
+          res.status(200).json({message: "email sent successfully"})
         }
       })
     }
